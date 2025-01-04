@@ -55,18 +55,18 @@ input[type="radio"]:checked::before {
     appearance: none;
     width: 20px!important;
     height: 20px!important;
-    border: 2px solid #34A853; /* Green color */
+    border: 2px solid #34A853;
     border-radius: 4px;
     outline: none;
     transition: all 0.3s ease;
   }
   
   .green-checkbox:checked {
-    background-color: #34A853; /* Green color */
+    background-color: #34A853; 
   }
   
   .green-checkbox:checked::after {
-    content: '\2713';
+    /* content: '\2713';
     font-size: 14px;
     color: #fff;
     position: absolute;
@@ -74,6 +74,6 @@ input[type="radio"]:checked::before {
     left: 6px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%); */
   }
   

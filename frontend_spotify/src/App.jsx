@@ -8,6 +8,7 @@ import { AppProvider } from "./states/Contet";
 // import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import Search from "./components/Search/Search";
 const App = () => {
   return (
     <Provider store={store}>
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </Router>
         <ToastContainer

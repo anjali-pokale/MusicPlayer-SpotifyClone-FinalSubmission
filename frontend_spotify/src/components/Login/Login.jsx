@@ -56,7 +56,7 @@ const Login = () => {
           </Link>
         </div>
       </header>
-      <div className="container py-10">
+      <div className="bg-[#1a1919] py-10 w-full">
         <div className="bg-black py-10 text-center w-1/2 mx-auto">
           <h1 className="text-5xl my-12 font-semibold">Log in to Spotify</h1>
           <div className="border-b border-gray-400 w-3/4 my-4 mx-auto"></div>

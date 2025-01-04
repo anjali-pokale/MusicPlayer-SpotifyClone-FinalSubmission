@@ -37,6 +37,27 @@ const SongBar = () => {
             dispatch(playMaster());
         }
     };
+    const addToLiked = async() => {
+        console.log(masterSong.mp3)
+        let data = JSON.stringify({
+            song_mp3:masterSong.mp3.src,
+            song_title:masterSong.title,
+            song_artist:masterSong.artist,
+            song_thumbnail:masterSong.img,
+        })
+        const res = await fetch('http://localhost:5000/api/playlist/like', {
+            method:"POST",
+            headers:{
+                'Content-Type':"application/json",
+                token:localStorage.getItem('token')
+            },
+            body:data,
+        })
+
+        let d = await res.json();
+        console.log(d)
+
+    };
     useEffect(() => {
         if (masterSong.mp3) {
             setDuration(formatTime(masterSong?.mp3?.duration));
@@ -100,6 +121,8 @@ const SongBar = () => {
     };
     const backwardSong = () => {
         console.log("backward");
+        if(songIdx <= 0 )
+            return;
         if (masterSong.mp3) {
             masterSong?.mp3?.pause();
             masterSong.mp3.currentTime = 0;
@@ -109,6 +132,8 @@ const SongBar = () => {
         dispatch(playSong(songs[songIdx-1]));
     };
     const forwardSong = () => {
+        if(songIdx >= 5-1)
+            return;
         if (masterSong.mp3) {
             masterSong?.mp3?.pause();
             masterSong.mp3.currentTime = 0;
@@ -122,7 +147,7 @@ const SongBar = () => {
         <div className="fixed w-full flex px-2 items-center justify-between bottom-0 left-0 h-20 bg-black">
             <div className="w-2/12">
                 <div className="flex items-center gap-2">
-                    <img src="/assets/Arijit-1.jpg" alt="" className="h-12" />
+                    <img src={masterSong.img} alt="" className="h-12" />
                     <div>
                         <h3 className="text-xs font-medium mb-1">
                             {masterSong?.title || "Arijit Singh"}
@@ -131,7 +156,7 @@ const SongBar = () => {
                             {masterSong?.artist || "Arijit Singh"}
                         </span>
                     </div>
-                    <AiOutlineHeart className="ml-3" />
+                    <AiOutlineHeart onClick={addToLiked} className="ml-3 cursor-pointer hover:text-green-400" />
                     <CgScreen className="ml-3" />
                 </div>
             </div>

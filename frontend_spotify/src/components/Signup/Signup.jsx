@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./Signup.css";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 const months = [
   "January",
   "February",
@@ -27,7 +28,8 @@ const Signup = () => {
     password: "",
     gender: "",
   });
-
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.account);
   const registerUser = async (e) => {
     e.preventDefault();
     console.log(userDetails);
@@ -62,8 +64,8 @@ const Signup = () => {
         gender: "",
       });
       toast.success(data.message);
-
-      localStorage.setItem("token", data.token);
+      navigate("/");
+      localStorage.setItem("token", JSON.stringify(data.token));
     } else {
       toast.error(data.message);
     }
@@ -84,9 +86,15 @@ const Signup = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
   return (
     <>
-      <div className="container py-8 bg-white">
+      <div className="py-8 bg-white">
         <div className="logo text-center">
           <Link to="/">
             <img
